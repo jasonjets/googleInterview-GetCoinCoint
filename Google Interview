@@ -1,0 +1,41 @@
+from math import trunc
+
+itemCost = float(input("How much did the item cost? "))
+amountPaid = float(input("How much did you pay? "))
+quartersInDrawer = input("Are there quarters in the drawer? ")
+
+
+def getChange(cost,paid):
+    totalChange = paid-cost
+    dollars = trunc(totalChange)
+    if quartersInDrawer == "yes":
+        if (totalChange - dollars) >= .25 :
+            quart = trunc((totalChange - dollars) / .25)
+            totalChange = (totalChange-dollars) - (quart*.25)
+    else:
+        quart =0
+    if totalChange >= .10 :
+        print()
+        dime = trunc(totalChange/.1)
+        totalChange = totalChange  - (dime * .1)
+    else:
+        dime = 0
+
+    if totalChange >= .05:
+        nick = trunc(totalChange/.05)
+        totalChange = totalChange - (nick *.05)
+    else:
+        nick = 0
+    if totalChange >= .01:
+        penny = trunc(totalChange/.01)
+        totalChange = round((totalChange - (penny*.01)),0)
+    else:
+        penny = 0
+    return print(f"""
+    Dollars:{dollars} 
+    quarters: {quart}
+    dimes: {dime}
+    nickles: {nick}
+    pennies:{penny} """)
+
+getChange(itemCost,amountPaid)
